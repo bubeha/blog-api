@@ -10,20 +10,27 @@ services:
       - app
     ports:
       - "8080:80"
+
   app:
     build:
       context: ./docker/app
       dockerfile: Dockerfile
     volumes:
       - ./:/app
+    environment:
+      XDEBUG_REMOTE_HOST: "192.167.213.1"
+      PHP_IDE_CONFIG: "serverName=Docker"
+
   cli:
     build:
-      context: ./docker/app
+      context: ./docker/cli
       dockerfile: Dockerfile
     volumes:
       - ./:/app
       - ./var/composer:/root/.composer/cache
-  db:
+    tty: true
+
+  postgres:
     image: postgres:11.2-alpine
     volumes:
       - ./var/postgres:/var/lib/postgresql/data
@@ -32,4 +39,4 @@ services:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: app
     ports:
-      - "54321:5432"
+      - "5432:5432"
