@@ -10,6 +10,8 @@ services:
       - app
     ports:
       - "8080:80"
+    networks:
+      - back
 
   app:
     build:
@@ -18,8 +20,10 @@ services:
     volumes:
       - ./:/app
     environment:
-      XDEBUG_REMOTE_HOST: "192.167.213.1"
+      XDEBUG_REMOTE_HOST: "192.167.222.1"
       PHP_IDE_CONFIG: "serverName=Docker"
+    networks:
+      - back
 
   cli:
     build:
@@ -29,6 +33,8 @@ services:
       - ./:/app
       - ./var/composer:/root/.composer/cache
     tty: true
+    networks:
+      - back
 
   postgres:
     image: postgres:11.2-alpine
@@ -40,3 +46,13 @@ services:
       POSTGRES_DB: app
     ports:
       - "5432:5432"
+    networks:
+      - back
+
+networks:
+  back:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.167.222.0/16
