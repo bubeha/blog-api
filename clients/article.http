@@ -1,0 +1,9 @@
+POST http://{{url}}/articles
+Accept: application/json
+Content-Type: application/json
+
+{
+"name": "test"
+}
+
+###
