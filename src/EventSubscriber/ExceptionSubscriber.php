@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
+use App\Exceptions\ValidationException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +28,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
      *
      * @param string $environment
      */
-    public function __construct($environment)
+    public function __construct(string $environment)
     {
         $this->environment = $environment;
     }
@@ -85,7 +86,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     /**
      * @param \Throwable $throwable
      *
-     * @return (array|int|string)[]
+     * @return array (array|int|string)[]
      *
      * @psalm-return array{message: string, code?: int|string, exception?: string, file?: string, line?: int, trace?: array}
      */
@@ -94,6 +95,12 @@ class ExceptionSubscriber implements EventSubscriberInterface
         $data = [
             'message' => $throwable->getMessage(),
         ];
+
+        if ($throwable instanceof ValidationException) {
+            return array_merge($data, [
+                'error' => $throwable->getErrors(),
+            ]);
+        }
 
         if ('prod' === $this->environment) {
             return $data;

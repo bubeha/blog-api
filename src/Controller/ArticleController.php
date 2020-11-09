@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Requests\Articles\CreateRequest;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class ArticleController
  * @package App\Controller
  */
-class ArticleController
+class ArticleController extends AbstractController
 {
     /**
      * @Route("/articles", name="create", methods={"POST"})
-     * @param Request $request
+     * @param CreateRequest $request
      * @return JsonResponse
      */
-    public function create(Request  $request): JsonResponse
+    public function create(CreateRequest $request): JsonResponse
     {
+        $request->validate();
 
-        $data = $request->request->all();
-
-        return new JsonResponse($data);
+//        return new JsonResponse($data);
     }
 }

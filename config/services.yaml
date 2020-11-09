@@ -26,5 +26,8 @@ services:
     App\EventSubscriber\ExceptionSubscriber:
         arguments: ['%kernel.environment%']
 
+    App\Services\FormRequest\AbstractFormRequest:
+        abstract: true
+        arguments: ['@request_stack', '@validator']
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

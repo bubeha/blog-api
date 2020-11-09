@@ -10,7 +10,7 @@ start:
 stop:
 	export _UID="${UID}" \
             && export _GID="${GID}" \
-            && time docker-compose stopls -l
+            && time docker-compose stop
 
 down:
 	export _UID="${UID}" \
