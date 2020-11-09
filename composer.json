@@ -24,7 +24,9 @@
     "symfony/yaml": "5.0.*"
   },
   "require-dev": {
-    "symfony/maker-bundle": "^1.23"
+    "psalm/plugin-symfony": "^2.0",
+    "symfony/maker-bundle": "^1.23",
+    "vimeo/psalm": "^4.1"
   },
   "config": {
     "preferred-install": {
