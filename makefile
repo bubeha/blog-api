@@ -18,4 +18,4 @@ down:
 		&& time docker-compose down
 
 psalm:
-	./vendor/bin/psalm
+	./vendor/bin/psalm --show-info=true

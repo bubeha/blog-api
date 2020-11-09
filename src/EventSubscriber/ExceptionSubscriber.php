@@ -84,7 +84,10 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
     /**
      * @param \Throwable $throwable
-     * @return array
+     *
+     * @return (array|int|string)[]
+     *
+     * @psalm-return array{message: string, code?: int|string, exception?: string, file?: string, line?: int, trace?: array}
      */
     private function getResponseData(\Throwable $throwable): array
     {
