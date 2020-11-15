@@ -19,7 +19,7 @@ class CreateRequest extends AbstractFormRequest
     /**
      * @return array
      */
-    protected function rules(): array
+    public function rules(): array
     {
         return [
             'name' => [new Length(['min' => 2]), new NotBlank(), new Type("string")],

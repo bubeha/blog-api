@@ -22,8 +22,6 @@ class ArticleController extends AbstractController
      */
     public function create(CreateRequest $request): JsonResponse
     {
-        $request->validate();
-
-//        return new JsonResponse($data);
+        return new JsonResponse([]);
     }
 }
