@@ -42,6 +42,10 @@ class FormRequestBinder
      */
     public function bind(Request $request, callable $actions): void
     {
+        if ( !is_array($actions)) {
+            return;
+        }
+
         $formRequest = $this->matchActionArguments($actions);
 
         if (! $formRequest) {
@@ -58,11 +62,11 @@ class FormRequestBinder
     }
 
     /**
-     * @param callable $action
+     * @param array $action
      * @return AbstractFormRequest|null
      * @throws InvalidArgumentException
      */
-    private function matchActionArguments(callable $action): ?AbstractFormRequest
+    private function matchActionArguments(array $action): ?AbstractFormRequest
     {
         $class = get_class($action[0]);
         $key = str_replace('\\', '_', $class) . '_' . $action[1];
