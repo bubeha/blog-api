@@ -3,8 +3,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-"username":"johndoe",
-"password":"test"
+"username":"admin@example.com",
+"password":"password"
 }
 
 ###
