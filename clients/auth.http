@@ -1,0 +1,10 @@
+POST http://{{url}}/api/login
+Accept: application/json
+Content-Type: application/json
+
+{
+"username":"johndoe",
+"password":"test"
+}
+
+###

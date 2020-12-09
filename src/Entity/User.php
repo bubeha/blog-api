@@ -23,7 +23,6 @@ class User implements UserInterface
      */
     private UuidInterface $id;
 
-
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
@@ -73,13 +72,31 @@ class User implements UserInterface
     }
 
     /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
+     * @return string
      */
     public function getUsername(): string
     {
-        return (string)$this->email;
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string {
+        return $this->name->getFirstName() . ' ' . $this->name->getLastName();
+    }
+
+    /**
+     * @param string $firstName
+     * @param string $lastName
+     */
+    public function setName(string $firstName, string $lastName): void
+    {
+        $name = new FullName();
+        $name->setFirstName($firstName);
+        $name->setLastName($lastName);
+
+        $this->name = $name;
     }
 
     /**
@@ -106,9 +123,13 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string)$this->password;
+        return $this->password;
     }
 
+    /**
+     * @param string $password
+     * @return $this
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -119,33 +140,15 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt()
+    public function getSalt(): void
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
     /**
-     * @return FullName
-     */
-    public function getName(): FullName
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $firstName
-     * @param string $lastName
-     */
-    public function setName(string $firstName, string $lastName): void
-    {
-        $this->name->setFirstName($firstName);
-        $this->name->setLastName($lastName);
-    }
-
-    /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

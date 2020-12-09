@@ -17,10 +17,9 @@ class ArticleController extends AbstractController
 {
     /**
      * @Route("/articles", name="create", methods={"POST"})
-     * @param CreateRequest $request
      * @return JsonResponse
      */
-    public function create(CreateRequest $request): JsonResponse
+    public function create(): JsonResponse
     {
         return new JsonResponse([]);
     }

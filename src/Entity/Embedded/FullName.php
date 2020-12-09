@@ -9,12 +9,13 @@ use Doctrine\ORM\Mapping AS ORM;
 /**
  * Class FullName
  * @package App\Entity\Embedded
+ * @ORM\Embeddable()
  */
 class FullName
 {
     /**
      * @var string
-     * @ORM\Column(type="string)
+     * @ORM\Column(type="string")
      */
     private string $firstName;
 
